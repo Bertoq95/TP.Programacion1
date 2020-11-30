@@ -12,7 +12,7 @@ public class Conejo {
     private double ancho;
     private double velocidad;
     private Kamehameha kamehameha[] = new Kamehameha[3];
-   
+    private int contKame = 0;
     
     Conejo(double x, double y, double alto, double ancho){
     	this.x = x;
@@ -29,7 +29,7 @@ public class Conejo {
 		
 	}
     public Kamehameha kamehameha() {
-        Kamehameha kamehameha = new Kamehameha(this.x, this.y,this.velocidad,this.ancho,2);
+        Kamehameha kamehameha = new Kamehameha(this.x, this.y,20,this.ancho,2);
         return kamehameha;
     }
     

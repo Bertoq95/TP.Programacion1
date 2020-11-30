@@ -9,14 +9,14 @@ public class Kamehameha {
 	private double y;
 	private double radio;
 	private double velocidad;
-	private double direccion;
+	
 	
 	public Kamehameha(double x, double y, double radio, double direccion,double velocidad) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.radio = radio;
-		this.direccion = direccion;
+	
 		this.velocidad = velocidad;
 	}
     public void mover() {

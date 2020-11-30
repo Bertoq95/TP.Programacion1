@@ -15,7 +15,8 @@ public class Juego extends InterfaceJuego
 	private Conejo conejo;
 	private Calle calles[] = new Calle[3];
 	private Color colors[] = {Color.BLUE,Color.GREEN,Color.YELLOW};
-	private List<Kamehameha> kamehamehas;
+	private Kamehameha Kame[] = new Kamehameha[3];
+	
 	// Variables y métodos propios de cada grupo
 	// ...
 	
@@ -24,7 +25,7 @@ public class Juego extends InterfaceJuego
 	{
 		// Inicializa el objeto entorno
 		this.entorno = new Entorno(this, "Boss Rabbit Rabber - Grupo 3 - v1", 900, 600);
-		this.kamehamehas = new ArrayList<>();
+		
 		// Inicializar lo que haga falta para el juego
 		// ...
 		this.conejo = new Conejo(400,550,30,30);
@@ -34,6 +35,7 @@ public class Juego extends InterfaceJuego
 			this.calles[i] = new Calle(405,posicionInicY,800,200);
 		}		
 		this.entorno.iniciar();
+		
 	}
 
 	/**
@@ -61,9 +63,21 @@ public class Juego extends InterfaceJuego
 		
 		for (int i = 0; i < calles.length; i++) {
 			if(colisionConejoVehiculo(this.conejo, this.calles[i].getVehiculos())) {
+				
 				this.conejo.setY(600);
+				entorno.dispose();
+				
+				
 			}
+			
+			
+		//	if(colisionKameVehiculo(this.Kame,this.calles[i].getVehiculos()) != 3) {
+		//		   int a =colisionKameVehiculo(this.Kame,this.calles[i].getVehiculos());
+		//		   Kame[a]=null;
+		//		}
 		}
+		
+		
 		
 		this.conejo.moverDown();
 		if (this.entorno.sePresiono(this.entorno.TECLA_ARRIBA)) {
@@ -78,9 +92,13 @@ public class Juego extends InterfaceJuego
 		if (this.entorno.sePresiono(this.entorno.TECLA_DERECHA)&&this.conejo.getX()< this.entorno.getWidth()-20) {
 			this.conejo.moverRight();
 		}
-
+       
         if (entorno.sePresiono(entorno.TECLA_ESPACIO)) {
-            kamehamehas.add(conejo.kamehameha());
+            for (int i = 0; i < Kame.length; i++) {
+				if(Kame[i]==null) {
+					Kame[i] = this.conejo.kamehameha();
+				}
+			} 
         }
         dibujarKames();
 
@@ -103,7 +121,8 @@ public class Juego extends InterfaceJuego
 		boolean colisionInfAutoConejo;
 		boolean colisionIzqAutoConejo;
 		boolean colisionDerAutoConejo;
-		  
+		 
+		
 		
 		for (int i = 0; i < vehiculos.length; i++) {
 			posicionSupVehiculo = vehiculos[i].getY() - vehiculos[i].getAlto()/2;
@@ -122,21 +141,64 @@ public class Juego extends InterfaceJuego
 			colisionDerAutoConejo = (posicionDerVehiculo > posicionIzqConejo) && (posicionDerVehiculo < posicionDerConejo);
 			
 			if((colisionSupAutoConejo || colisionInfAutoConejo) && (colisionIzqAutoConejo || colisionDerAutoConejo)) {
+				
 				return true;
+				
 			}
 			
-		}
 			
-	
+		}
 		return false;		
 	}
 	public void dibujarKames() {
-        for (Kamehameha kamehameha : kamehamehas) {
+        for (Kamehameha kamehameha : Kame) {
             kamehameha.mover();
         	kamehameha.dibujarKame(entorno);
         }
     }
 	
+	public static int colisionKameVehiculo(Kamehameha[] kamehamehas2, Vehiculo[] vehiculos ) {
+		double posicionSupVehiculo2;
+		double posicionInfVehiculo2;
+		double posicionIzqVehiculo2;
+		double posicionDerVehiculo2;
+		
+		double posicionSupkamehameha;
+		double posicionInfkamehameha;
+		double posicionIzqkamehameha;
+		double posicionDerkamehameha;
+		
+		boolean colisionSupAutoKame;
+		boolean colisionInfAutoKame;
+		boolean colisionIzqAutoKame;
+		boolean colisionDerAutoKame;
+		
+		for (int i = 0; i < vehiculos.length; i++) {
+			posicionSupVehiculo2 = vehiculos[i].getY() - vehiculos[i].getAlto()/2;
+			posicionInfVehiculo2 = vehiculos[i].getY() + vehiculos[i].getAlto()/2;
+			posicionIzqVehiculo2 = vehiculos[i].getX() - vehiculos[i].getAncho()/2;
+			posicionDerVehiculo2 = vehiculos[i].getX() + vehiculos[i].getAncho()/2;
+			for (int j = 0; j < kamehamehas2.length; j++) {
+			posicionSupkamehameha = kamehamehas2[j].getY() - kamehamehas2[j].getRadio()/2;
+			posicionInfkamehameha = kamehamehas2[j].getY() + kamehamehas2[j].getRadio()/2;
+			posicionIzqkamehameha = kamehamehas2[j].getX() - kamehamehas2[j].getRadio()/2;
+			posicionDerkamehameha = kamehamehas2[j].getX() + kamehamehas2[j].getRadio()/2;
+			
+			colisionSupAutoKame = (posicionSupVehiculo2 > posicionSupkamehameha) && (posicionSupVehiculo2 < posicionInfkamehameha);
+			colisionInfAutoKame = (posicionInfVehiculo2 > posicionSupkamehameha) && (posicionInfVehiculo2 < posicionInfkamehameha);
+			colisionIzqAutoKame = (posicionIzqVehiculo2 > posicionIzqkamehameha) && (posicionIzqVehiculo2 < posicionDerkamehameha);
+			colisionDerAutoKame = (posicionDerVehiculo2> posicionIzqkamehameha) && (posicionDerVehiculo2 < posicionDerkamehameha);
+         if((colisionSupAutoKame || colisionInfAutoKame) && (colisionIzqAutoKame || colisionDerAutoKame)) {
+				
+				return j;
+				
+			}
+		  }
+		}
+			
+		return 3;
+		
+	}
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args)
