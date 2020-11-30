@@ -11,6 +11,7 @@ public class Conejo {
     private double alto;
     private double ancho;
     private double velocidad;
+    private Kamehameha kamehameha[] = new Kamehameha[3];
    
     
     Conejo(double x, double y, double alto, double ancho){
@@ -19,6 +20,7 @@ public class Conejo {
     	this.alto = alto;
     	this.ancho = ancho;
     	this.velocidad = 0.5;
+       
     
     }
     
@@ -26,8 +28,14 @@ public class Conejo {
 		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.red);
 		
 	}
- 
-    public void moverDown() {
+    public Kamehameha kamehameha() {
+        Kamehameha kamehameha = new Kamehameha(this.x, this.y,this.velocidad,this.ancho,2);
+        return kamehameha;
+    }
+    
+
+  
+	public void moverDown() {
     	this.y = this.y + this.velocidad;
     }
     
@@ -43,6 +51,19 @@ public class Conejo {
     	this.y = this.y - 20;
     }
     
+
+    public double getAlto() {
+		return alto;
+	}
+
+	public double getAncho() {
+		return ancho;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+    
     public double getX() {
 		return this.x;
 	}
@@ -50,4 +71,5 @@ public class Conejo {
     public double getY() {
 		return this.y;
 	}  	
+
 }
