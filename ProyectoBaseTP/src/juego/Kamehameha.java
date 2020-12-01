@@ -10,18 +10,13 @@ public class Kamehameha {
 	private double radio;
 	private double velocidad;
 	
-	
-	public Kamehameha(double x, double y, double radio, double direccion,double velocidad) {
+	public Kamehameha(double x, double y, double radio, double velocidad) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.radio = radio;
-	
 		this.velocidad = velocidad;
 	}
-    public void mover() {
-	     this.y -= velocidad;
-	    }
 
 	public double getX() {
 		return x;
@@ -47,8 +42,11 @@ public class Kamehameha {
 		this.radio = radio;
 	}
 	
-
-	public void dibujarKame(Entorno entorno) {
-		entorno.dibujarCirculo(this.x, this.y, this.radio, Color.WHITE);
+	 public void mover() {
+    	this.y = this.y - this.velocidad ;
+    }
+	
+	public void Dibujar(Entorno entorno) {
+		entorno.dibujarCirculo(x, y, radio, Color.WHITE);
 	}
 }
