@@ -21,24 +21,24 @@ public class Conejo {
     	this.velocidad = 0.5;
     
     }
-    
+    //Dibuja Conejo
     public void Dibujarse(Entorno entorno) {
 		entorno.dibujarRectangulo(x, y, ancho, alto, 0, Color.red);
 		
 	}
-
+    //Mueve hacia abajo
 	public void moverDown() {
     	this.y = this.y + this.velocidad;
     }
-    
+    //mueve hacia la derecha el conejo
 	void moverRight() {
     	this.x = this.x + 20 ;
     }
-	
+	//mueve hacia la izquierda el conejo
     void moverLeft() {
     	this.x = this.x - 20;
     }
-    
+    //mueve hacia arriba el conejo
     void moverUp() {
     	this.y = this.y - 20;
     }
@@ -63,4 +63,9 @@ public class Conejo {
     public double getY() {
 		return this.y;
 	}  	
+    //Crea el kamehameha
+    public Kamehameha disparar()
+    {
+    	return new Kamehameha(this.x, this.y, 20, 2);
+    }
 }

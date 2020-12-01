@@ -41,11 +41,11 @@ public class Kamehameha {
 	public void setRadio(double radio) {
 		this.radio = radio;
 	}
-	
+	//Movimiento del kamehameha
 	 public void mover() {
     	this.y = this.y - this.velocidad ;
     }
-	
+	//Dibuja el Kamehameha
 	public void Dibujar(Entorno entorno) {
 		entorno.dibujarCirculo(x, y, radio, Color.WHITE);
 	}
