@@ -62,6 +62,7 @@ public class Juego extends InterfaceJuego
 		for (int i = 0; i < calles.length; i++) {
 			if(colisionConejoVehiculo(this.conejo, this.calles[i].getVehiculos())) {
 				this.conejo.setY(600);
+				entorno.dispose();
 			}
 		}
 		
